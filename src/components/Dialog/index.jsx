@@ -1,25 +1,23 @@
 import "./dialog.style.css"
 
 export function Dialog() {
-	const dialog = document.querySelector("dialog");
-	const showButton = document.querySelector("dialog + button");
-	const closeButton = document.querySelector("dialog button");
+	// const dialog = document.querySelector("dialog");
 
-	showButton.addEventListener("click", () => {
+	const openDialog = () => {
 		dialog.showModal();
-	});
+	}
 
-	closeButton.addEventListener("click", () => {
+	const closeDialog = () => {
 		dialog.close();
-	});
+	}
 
 	return (
 		<>
 			<dialog>
-				<button autoFocus>Close</button>
+				<button autoFocus onClick={closeDialog}>Close</button>
 				<p>This modal dialog has a groovy backdrop!</p>
 			</dialog>
-			<button>Show the dialog</button>
+			<button onClick={openDialog}>Show the dialog</button>
 		</>
 	)
 }
