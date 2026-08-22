@@ -1,19 +1,22 @@
+import { useRef } from "react";
 import "./dialog.style.css"
 
 export function Dialog() {
 	// const dialog = document.querySelector("dialog");
 
+	const dialogRef = useRef(null)
+
 	const openDialog = () => {
-		dialog.showModal();
+		dialogRef.current.showModal();
 	}
 
 	const closeDialog = () => {
-		dialog.close();
+		dialogRef.current.close();
 	}
 
 	return (
 		<>
-			<dialog>
+			<dialog ref={dialogRef}>
 				<button autoFocus onClick={closeDialog}>Close</button>
 				<p>This modal dialog has a groovy backdrop!</p>
 			</dialog>
