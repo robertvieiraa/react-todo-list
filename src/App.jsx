@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { ChecklistsWrapper } from "./components/ChecklistsWrapper"
 import { Container } from "./components/Container"
 import { Dialog } from "./components/Dialog"
@@ -53,6 +54,14 @@ const completed = [
 
 function App() {
 
+  const [showDialog, setShowDialog] = useState(false)
+
+  // Inverte o valor
+  const toggleDialog = () => {
+    setShowDialog(!showDialog)
+    console.log("Alternar modal")
+  }
+
   return (
     <main>
       <Container>
@@ -61,7 +70,6 @@ function App() {
             <IconSchool /> Plano de estudos
           </Heading>
         </Header>
-        <Dialog />
         <ChecklistsWrapper>
           <SubHeading>Para estudar</SubHeading>
           <ToDoList>
@@ -76,7 +84,8 @@ function App() {
             })}
           </ToDoList>
           <Footer>
-            <FabButton>
+            <Dialog isOpen={showDialog} />
+            <FabButton onClick={toggleDialog}>
               <IconPlus />
             </FabButton>
           </Footer>
