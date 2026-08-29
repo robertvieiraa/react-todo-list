@@ -37,6 +37,7 @@ const todos = [
     createdAt: "2022-10-31"
   }
 ]
+
 const completed = [
   {
     id: 5,
@@ -84,7 +85,7 @@ function App() {
             })}
           </ToDoList>
           <Footer>
-            <Dialog isOpen={showDialog} />
+            <Dialog isOpen={showDialog} onClose={toggleDialog}/>
             <FabButton onClick={toggleDialog}>
               <IconPlus />
             </FabButton>
