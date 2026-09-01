@@ -10,8 +10,6 @@ import { IconPlus, IconSchool } from "./components/icons"
 import { SubHeading } from "./components/SubHeading"
 import { ToDoItem } from "./components/ToDoItem"
 import { ToDoList } from "./components/ToDoList"
-import { TextInput } from "./components/TextInput"
-import { Button } from "./components/Button"
 import { TodoForm } from "./components/TodoForm"
 
 const todos = [
@@ -63,11 +61,11 @@ function App() {
   // Inverte o valor
   const toggleDialog = () => {
     setShowDialog(!showDialog)
-    console.log("Alternar modal")
   }
 
   const addTodo = () => {
-    console.log('Precisamos add um novo todo')
+    console.log('Precisamos adicionar um novo todo')
+    toggleDialog()
   }
 
   return (
