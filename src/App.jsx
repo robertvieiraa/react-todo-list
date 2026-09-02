@@ -12,6 +12,7 @@ import { ToDoItem } from "./components/ToDoItem"
 import { ToDoList } from "./components/ToDoList"
 import { TodoForm } from "./components/TodoForm"
 
+/*
 const todos = [
   {
     id: 1,
@@ -53,18 +54,43 @@ const completed = [
     createdAt: "2022-10-31"
   }
 ]
+*/
 
 function App() {
 
   const [showDialog, setShowDialog] = useState(false)
+
+  const [todos, setTodos] = useState([
+    {
+      id: 1,
+      description: "JSX e componentes",
+      completed: false,
+      createdAt: "2022-10-31"
+    },
+    {
+      id: 2,
+      description: "Controle de inputs e formulários controlados",
+      completed: true,
+      createdAt: "2022-10-31"
+    }
+  ])
 
   // Inverte o valor
   const toggleDialog = () => {
     setShowDialog(!showDialog)
   }
 
-  const addTodo = () => {
-    console.log('Precisamos adicionar um novo todo')
+  const addTodo = (formData) => {
+    const description = formData.get('description')
+    setTodos(prevState => {
+      const todo = {
+        id: prevState.length + 1,
+        description,
+        completed: false,
+        createdAt: new Date().toISOString()
+      }
+      return [...prevState, todo]
+    })
     toggleDialog()
   }
 
@@ -79,13 +105,13 @@ function App() {
         <ChecklistsWrapper>
           <SubHeading>Para estudar</SubHeading>
           <ToDoList>
-            {todos.map(function (t) {
+            {todos.filter(t => !t.completed).map(function (t) {
               return <ToDoItem key={t.id} item={t} />
             })}
           </ToDoList>
           <SubHeading>Concluído</SubHeading>
           <ToDoList>
-            {completed.map(function (t) {
+            {todos.filter(t => t.completed).map(function (t) {
               return <ToDoItem key={t.id} item={t} />
             })}
           </ToDoList>
