@@ -3,8 +3,6 @@ import "./dialog.style.css"
 import { IconClose } from "../icons";
 
 export function Dialog({ isOpen, onClose, children }) {
-	// const dialog = document.querySelector("dialog");
-
 	const dialogRef = useRef(null)
 
 	useEffect(() => {
@@ -14,6 +12,15 @@ export function Dialog({ isOpen, onClose, children }) {
 			closeDialog()
 		}
 	}, [isOpen])
+
+	useEffect(() => {
+		const dialog = dialogRef.current
+		dialog?.addEventListener('close', onClose)
+		// Essa função é executada quando o componente é desmontado
+		return () => {
+			dialog?.removeEventListener('close', onClose)
+		}
+	}, [onClose])
 
 	const openDialog = () => {
 		dialogRef.current.showModal();
