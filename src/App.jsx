@@ -12,11 +12,15 @@ import TodoContext from "./components/TodoProvider/TodoContext.js"
 import { TodoGroup } from "./components/TodoGroup"
 
 function App() {
-  const { todos, addTodo, showDialog, openFormTodoDialog, closeFormTodoDialog, selectedTodo } = use(TodoContext)
+  const { todos, addTodo, showDialog, openFormTodoDialog, closeFormTodoDialog, selectedTodo, editTodo } = use(TodoContext)
 
   const handleFormSubmit = (FormData) => {
-    addTodo(FormData)
-    openFormTodoDialog()
+    if (selectedTodo) {
+      editTodo(FormData)
+    } else {
+      addTodo(FormData)
+    }
+    closeFormTodoDialog()
   }
 
   return (
@@ -43,7 +47,7 @@ function App() {
               defaultValue={selectedTodo?.description}// Se for nulo, não vai tentar acessar a description
               />
             </Dialog>
-            <FabButton onClick={openFormTodoDialog}>
+            <FabButton onClick={() => openFormTodoDialog()}>
               <IconPlus />
             </FabButton>
           </Footer>
